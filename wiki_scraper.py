@@ -151,8 +151,7 @@ def get_box_office_number(movie):
 """
 def add_box_office_numbers(movies):
 	# Find the box office number for each movie
-	# For testing first only get the 1st one.
-	for movie in movies[0:1]:
+	for movie in movies:
 		# Simply print the box office number (for now)
 		print get_box_office_number(movie)
 
