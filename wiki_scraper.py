@@ -7,6 +7,7 @@ Simple scraper that pulls multiple pages from wikipedia.
 # Importing the necessary modules
 from urllib import urlopen
 from xml.etree import ElementTree
+import json
 
 from amount_normalizer import normalize_amount
 
@@ -153,6 +154,8 @@ def add_box_office_numbers(movies):
 	# Find the box office number for each movie
 	for movie in movies:
 		# 
+		# Print the title for debugging
+		print movie['title']
 		# Set the box office in the dict
 		movie['box_office'] = get_box_office_number(movie)
 
@@ -169,8 +172,10 @@ def main():
 	
 	# Add release dates to the movies
 	add_box_office_numbers(movies)
-	print movies
-	
+
+	# Outputs the movies as JSON
+	with open('disney_movies.json', 'w') as outfile:
+		json.dump(movies, outfile)
 	
 if __name__ == '__main__':
 	main()
