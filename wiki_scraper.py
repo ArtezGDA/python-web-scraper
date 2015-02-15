@@ -46,14 +46,18 @@ def get_all_movies():
 		# Only try to get the anchor if there is one
 		if anchor_elem is not None:
 			
-			# Get the text as title
-			movie['title'] = anchor_elem.text
+			# Only add the movie if the title is not None
+			title = anchor_elem.text
+			if title is not None:
+				
+				# Set the title
+				movie['title'] = title
 
-			# Get the href as link
-			movie['link'] = anchor_elem.get('href')
+				# Get the href as link
+				movie['link'] = anchor_elem.get('href')
 
-			# Append the dict to the array
-			movies.append(movie)
+				# Append the dict to the array
+				movies.append(movie)
 			
 	# Return the array
 	return movies
