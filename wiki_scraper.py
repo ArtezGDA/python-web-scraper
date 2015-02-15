@@ -77,9 +77,28 @@ def get_all_movies():
 	Expects a dictionary with at least the 'link' key
 """
 def get_box_office_number(movie):
-	# Empty implementation
-	return 123.40
-
+	# 
+	# Scraping Variables 
+	# 
+	# Set a Base URL
+	base_url = "http://en.wikipedia.org"
+	# The xpath to get the table header "Box Office"
+	table_header_xpath = './/table[contains(@class, "infobox")]//th[contains(.,"Box office")]'
+	
+	# create full url
+	full_url = base_url + movie['link']
+	
+	# open (and load) the site, then read the html
+	site = urlopen(full_url)
+	html = site.read()
+	
+	# parse the html as an XML-tree
+	tree = ElementTree.fromstring(html)
+	
+	# find the box office header
+	box_header = tree.find(table_header_xpath)
+	
+	
 
 """
 	add_box_office_numbers(movies)
@@ -90,7 +109,8 @@ def get_box_office_number(movie):
 """
 def add_box_office_numbers(movies):
 	# Find the box office number for each movie
-	for movie in movies:
+	# For testing first only get the 1st one.
+	for movie in movies[0:1]:
 		# Simply print the box office number (for now)
 		print get_box_office_number(movie)
 
