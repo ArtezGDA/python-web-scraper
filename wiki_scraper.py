@@ -8,6 +8,8 @@ Simple scraper that pulls multiple pages from wikipedia.
 from urllib import urlopen
 from xml.etree import ElementTree
 
+from amount_normalizer import normalize_amount
+
 
 """
 	get_all_movies()
@@ -135,7 +137,7 @@ def get_box_office_number(movie):
 					# The amount is in the text
 					amount_text = td.text
 					
-					return amount_text
+					return normalize_amount(amount_text)
 				
 				
 		
