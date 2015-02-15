@@ -42,22 +42,18 @@ def get_all_movies():
 		# Get the <a> sub element
 		sub_element_xpath = ".//a"
 		anchor_elem = elem.find(sub_element_xpath)
-		
+
+		# Only try to get the anchor if there is one
 		if anchor_elem is not None:
+			
 			# Get the text as title
 			movie['title'] = anchor_elem.text
-
-			## Getting the keys
-			# anchor_elem.keys()
-			# anchor_elem.get
 
 			# Get the href as link
 			movie['link'] = anchor_elem.get('href')
 
 			# Append the dict to the array
 			movies.append(movie)
-		else:
-			ElementTree.dump(elem)
 			
 	# Return the array
 	return movies
