@@ -11,14 +11,14 @@ from xml.etree import ElementTree
 from amount_normalizer import normalize_amount
 
 
-"""
-	get_all_movies()
-	
-	Scrapes a single page with a list of movies.
-	Adds each movie to an array.
-	And returns that array
-"""
 def get_all_movies():
+	"""
+		get_all_movies()
+
+		Scrapes a single page with a list of movies.
+		Adds each movie to an array.
+		And returns that array
+	"""
 	#
 	# Scraping Settings
 	#
@@ -72,13 +72,13 @@ def get_all_movies():
 	return movies
 
 
-"""
-	get_box_office_number(movie)
-	
-	Returns the box office number for the given movie (dict).
-	Expects a dictionary with at least the 'link' key
-"""
 def get_box_office_number(movie):
+	"""
+		get_box_office_number(movie)
+
+		Returns the box office number for the given movie (dict).
+		Expects a dictionary with at least the 'link' key
+	"""
 	# 
 	# Scraping Variables 
 	# 
@@ -137,33 +137,31 @@ def get_box_office_number(movie):
 					# The amount is in the text
 					amount_text = td.text
 					
+					# Return the normalized amount
 					return normalize_amount(amount_text)
 				
-				
-		
-	
 	
 
-"""
-	add_box_office_numbers(movies)
-	
-	Adds the Box office number to each of the movies provided.
-	Does not return anything, but modifies the given array.
-	Expects an array with dicts. Each dict should be our "movie dict"
-"""
 def add_box_office_numbers(movies):
+	"""
+		add_box_office_numbers(movies)
+
+		Adds the Box office number to each of the movies provided.
+		Does not return anything, but modifies the given array.
+		Expects an array with dicts. Each dict should be our "movie dict"
+	"""
 	# Find the box office number for each movie
 	for movie in movies:
 		# Simply print the box office number (for now)
 		print get_box_office_number(movie)
 
 
-"""
-	main()
-
-	Main function with overall the recipe / strategy for scraping. 
-"""
 def main():
+	"""
+		main()
+
+		Main function with overall the recipe / strategy for scraping. 
+	"""
 	#
 	# Get all the movies from the overview page
 	movies = get_all_movies()
