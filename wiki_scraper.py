@@ -83,7 +83,7 @@ def get_box_office_number(movie):
 	# Set a Base URL
 	base_url = "http://en.wikipedia.org"
 	# The xpath to get the table header "Box Office"
-	table_header_xpath = './/table[contains(@class, "infobox")]//th[contains(.,"Box office")]'
+	# table_header_xpath = './/table[contains(@class, "infobox")]//th[contains(.,"Box office")]'
 	
 	# create full url
 	full_url = base_url + movie['link']
@@ -94,9 +94,51 @@ def get_box_office_number(movie):
 	
 	# parse the html as an XML-tree
 	tree = ElementTree.fromstring(html)
+
+	# Construct a parent map
+	parent_map = dict((c, p) for p in tree.getiterator() for c in p)
 	
-	# find the box office header
-	box_header = tree.find(table_header_xpath)
+	# find all the tables
+	tables = tree.findall(".//table")
+	
+	# Go through all the tables to find the one with class = "infobox"
+	for t in tables:
+		
+		# Get the class of the table
+		t_class = t.get('class')
+		
+		# Only if the table contains "infobox"
+		if "infobox" in t_class:
+			
+			# Now we know that the element t is the infobox table!
+			
+			# Get all the table headers (th)
+			ths = t.findall(".//th")
+			
+			# Go through all the table heaers to find the th with "Box office"
+			for th in ths:
+				
+				# Get the text of this th
+				text = th.text
+				
+				# Only if the text contains "Box office"
+				if "Box office" in text:
+					
+					# Now we know that the element th is the table header for Box office
+					
+					# Get the parent of this th
+					box_office_row = parent_map[th]
+					
+					# Get the td of this tr
+					td = box_office_row.find("td")
+					
+					# The amount is in the text
+					amount_text = td.text
+					
+					return amount_text
+				
+				
+		
 	
 	
 
