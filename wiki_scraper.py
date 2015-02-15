@@ -9,6 +9,13 @@ from urllib import urlopen
 from xml.etree import ElementTree
 
 
+"""
+	get_all_movies()
+	
+	Scrapes a single page with a list of movies.
+	Adds each movie to an array.
+	And returns that array
+"""
 def get_all_movies():
 	#
 	# Scraping Settings
@@ -62,9 +69,46 @@ def get_all_movies():
 	# Return the array
 	return movies
 
+
+"""
+	get_box_office_number(movie)
+	
+	Returns the box office number for the given movie (dict).
+	Expects a dictionary with at least the 'link' key
+"""
+def get_box_office_number(movie):
+	# Empty implementation
+	return 123.40
+
+
+"""
+	add_box_office_numbers(movies)
+	
+	Adds the Box office number to each of the movies provided.
+	Does not return anything, but modifies the given array.
+	Expects an array with dicts. Each dict should be our "movie dict"
+"""
+def add_box_office_numbers(movies):
+	# Find the box office number for each movie
+	for movie in movies:
+		# Simply print the box office number (for now)
+		print get_box_office_number(movie)
+
+
+"""
+	main()
+
+	Main function with overall the recipe / strategy for scraping. 
+"""
 def main():
+	#
+	# Get all the movies from the overview page
 	movies = get_all_movies()
-	print movies
+	
+	# Add release dates to the movies
+	add_box_office_numbers(movies)
+	# print movies
+	
 	
 if __name__ == '__main__':
 	main()
