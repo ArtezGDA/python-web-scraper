@@ -152,8 +152,9 @@ def add_box_office_numbers(movies):
 	"""
 	# Find the box office number for each movie
 	for movie in movies:
-		# Simply print the box office number (for now)
-		print get_box_office_number(movie)
+		# 
+		# Set the box office in the dict
+		movie['box_office'] = get_box_office_number(movie)
 
 
 def main():
@@ -168,7 +169,7 @@ def main():
 	
 	# Add release dates to the movies
 	add_box_office_numbers(movies)
-	# print movies
+	print movies
 	
 	
 if __name__ == '__main__':
