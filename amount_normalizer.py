@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 """
 amount_normalizer.py
 
@@ -27,6 +29,15 @@ def normalize_amount(stringInput):
 		if stringInput.endswith('billion'):
 			multiplier = 1000000000
 			stringInput = stringInput.strip('billion')
+		
+		# estimate ($76.4–$83.3)
+		if u"–$" in stringInput:
+			parts = stringInput.split(u"–$")
+			sumOfParts = 0
+			for p in parts:
+				sumOfParts += float(p)
+			avg = sumOfParts / len(parts)
+			stringInput = str(avg)
 			
 		# print stringInput + " " + str(multiplier)
 		amount = int(round(float(stringInput) * multiplier))

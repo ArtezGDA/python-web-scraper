@@ -125,7 +125,7 @@ def get_box_office_number(movie):
 				text = th.text
 				
 				# Only if the text contains "Box office"
-				if "Box office" in text:
+				if text and "Box office" in text:
 					
 					# Now we know that the element th is the table header for Box office
 					
